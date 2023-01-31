@@ -30,6 +30,7 @@ export default {
             nextUrl:'',
             last_page:'',
             per_page:'',
+            filter:''
         };
     },
 
@@ -45,6 +46,13 @@ export default {
       },
     },
   },
+  watch:{
+    filter: {
+      handler() {
+        this.search();
+      },
+  },
+},
     methods:{
         openModel(id){
 this.id=id;
@@ -59,7 +67,22 @@ this.$bvModal.show('invite-user')
 handlePageChange(value) {
       this.currentPage = value;
     },
+    async search(){
+
+        const config = {
+    headers: { Authorization: `Bearer ${this.validToken()}` }
+};
+try{
     
+    let formData = new FormData();
+      formData.append("name",this.filter);
+    await this.$axios.post('SearchCompany',formData,config).then((res)=>{
+        this.companies=res.data;
+    });
+}catch(error){
+
+}
+    },
         async fetchData(){
             const config = {
     headers: { Authorization: `Bearer ${this.validToken()}` }
@@ -133,6 +156,23 @@ if (result) {
             <div class="mb-3 btn btn-primary waves-effect waves-light" v-b-modal.add-company><i class="fa fa-plus" style="font-size: 14px;"></i> Add Company
             </div>
         </div>
+    <div class="col-sm-12 col-md-6">
+              <div class="d-flex-end text-md-end mt-1" style="display: flex;">
+                <label class="d-inline-flex align-items-center">
+                  <div class="search-box">
+                    <div class="position-relative">
+                      <input
+                        v-model="filter"
+                        type="search"
+                        class="form-control form-control-md ml-2 border-primary rounded"
+                        placeholder="Recherche..."
+                      />
+                      <i class="uil uil-search search-icon"></i>
+                    </div>
+                  </div>
+                </label>
+                </div>
+                </div>
     </div>
     <div class="row">
         <div class="col-xl-3 col-sm-6" v-for="(item, index) in companies" :key="index">

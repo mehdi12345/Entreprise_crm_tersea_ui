@@ -53,7 +53,12 @@
           },
           {
             key: "status",
-            label: "Status",
+            label: "Invitation Status",
+            sortable: true,
+          },
+          {
+            key: "user_status",
+            label: "User Status",
             sortable: true,
           },
           {
@@ -214,6 +219,19 @@ const bodyParameters = {
                 </div>
                 <div class="alert-danger" v-else style="border-radius: 20px;">
                     Cancel
+                </div>
+            </div>
+          </template>
+          <template v-slot:cell(user_status)="data">
+            <div class="text-center">
+                <div class="alert-success" v-if="data.item.user_status==1" style="border-radius: 20px;">
+                    Verified
+                </div>
+                <div class="alert-danger" v-else-if="data.item.user_status==-1" style="border-radius: 20px;">
+                    Not Verified
+                </div>
+                <div class="alert-warning" v-else style="border-radius: 20px;">
+                    Accepted
                 </div>
             </div>
           </template>

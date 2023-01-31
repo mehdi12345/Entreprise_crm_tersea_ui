@@ -192,7 +192,7 @@ async confirmPassword()  {
                       <b-form-input
                         id="password_confirmation"
                         v-model="password_confirmation"
-                        type="password_confirmation"
+                        type="password"
                         placeholder="Enter your password confirmation"
                         :class="{ 'is-invalid': submitted && $v.password_confirmation.$error }"
                       ></b-form-input>
