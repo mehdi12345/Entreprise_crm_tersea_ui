@@ -2,13 +2,11 @@
 
 import { mapState } from "vuex";
 
-import { menuItems } from "./menu";
 
 export default {
   data() {
     return {
-      menuItems: menuItems,
-      admin:null,
+      admin:this.$auth.$storage.getCookie('user')['is_admin'],
     };
   },
   props: {
@@ -22,28 +20,8 @@ export default {
     },
   },
   computed: mapState(["layout"]),
-  mounted:function() {
-    this.check();
-  },
   methods: {
-    /**
-     * Toggle menu
-     */
-     validToken(){
-      return this.$auth.strategy.token.get();
-    },
-     async check(){
-      const config = {
-    headers: { Authorization: `Bearer ${this.validToken()}` }
-};
-
-const bodyParameters = {
-   key: "value"
-};
-      await this.$axios.post('checkAdmin',bodyParameters,config).then((res)=>{
-        this.admin=res.data.isAdmin;
-      });
-     },
+    
     toggleMenu() {
       this.$parent.toggleMenu();
     },

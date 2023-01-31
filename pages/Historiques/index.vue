@@ -100,7 +100,7 @@ const bodyParameters = {
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="d-flex-end text-md-end mt-1" style="display: flex;">
-                <label class="d-inline-flex align-items-center">
+                <label class="d-inline-flex align-items-center" style="position: absolute;right: 20px;">
                   <div class="search-box">
                     <div class="position-relative">
                       <input
@@ -135,8 +135,8 @@ const bodyParameters = {
           </template>
           </b-table>
         </div>
-        <div class="row">
-                        <div class="col">
+        <div class="row justify-content-end">
+                        <div class="col-9 ">
                             <div class="dataTables_paginate paging_simple_numbers float-end">
                                 <ul class="pagination pagination-rounded mb-0">
                                     <!-- pagination -->
